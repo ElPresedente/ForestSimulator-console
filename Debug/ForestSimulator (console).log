@@ -1,10 +1,2 @@
-﻿  Entity.cpp
-  Terrain.cpp
-  Tile.cpp
-  TreeEntity.cpp
-  main.cpp
-  Создание кода...
-Terrain.obj : error LNK2001: неразрешенный внешний символ "private: static int Terrain::x" (?x@Terrain@@0HA).
-Terrain.obj : error LNK2001: неразрешенный внешний символ "private: static int Terrain::y" (?y@Terrain@@0HA).
-Terrain.obj : error LNK2001: неразрешенный внешний символ "private: static class Tile * Terrain::map" (?map@Terrain@@0PAVTile@@A).
-C:\Users\vova1\YandexDisk\projects\ForestSimulator (console)\Debug\ForestSimulator (console).exe : fatal error LNK1120: неразрешенных внешних элементов: 3
+﻿  Tile.cpp
+  ForestSimulator (console).vcxproj -> D:\test\ForestSimulator-console\Debug\ForestSimulator (console).exe

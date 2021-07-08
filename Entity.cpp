@@ -5,3 +5,11 @@ Entity::Entity(Vector2 position, EntityType type) : Position(position), Type(typ
 };
 
 Entity::~Entity() {};
+
+void Entity::EntityFunction() {
+
+}
+
+char Entity::GetChar() {
+	return '2';
+}

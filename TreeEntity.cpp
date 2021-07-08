@@ -7,3 +7,7 @@ TreeEntity::TreeEntity(Vector2 position) :
 void TreeEntity::EntityFunction() {
 	return;
 }
+
+char TreeEntity::GetChar() {
+	return '%';
+}

@@ -1,1 +1,2 @@
 C:\Users\vova1\YandexDisk\projects\ForestSimulator (console)\Debug\ForestSimulator (console).exe
+D:\test\ForestSimulator-console\Debug\ForestSimulator (console).exe

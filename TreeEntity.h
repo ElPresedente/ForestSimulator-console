@@ -6,5 +6,6 @@ class TreeEntity :
 public:
     TreeEntity(Vector2 position);
     void EntityFunction();
+    char GetChar();
 };
 

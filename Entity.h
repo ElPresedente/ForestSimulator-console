@@ -5,7 +5,8 @@ class Entity
 public:
 	Vector2 Position;
 	EntityType Type;
-	void EntityFunction() {};
+	virtual void EntityFunction();
+	virtual char GetChar();
 protected:
 	Entity(Vector2 position, EntityType type = EntityType::None);
 	virtual ~Entity();

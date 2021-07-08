@@ -5,15 +5,15 @@ Tile::Tile(TileType type) : type(type) {};
 char Tile::GetChar() {
 	switch (type) {
 		case TileType::Rock: {
-			return (char)64;
+			return '@';
 			break;
 		}
 		case TileType::Grass: {
-			return (char)35;
+			return '.';
 			break;
 		}
 		default:{
-			return (char)32;
+			return ' ';
 			break;
 		}
 	}

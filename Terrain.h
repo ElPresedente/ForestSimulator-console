@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <vector>
+#include <string>
 #include "TreeEntity.h"
 class Terrain
 {
