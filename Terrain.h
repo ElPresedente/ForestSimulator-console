@@ -16,12 +16,15 @@ public:
 
 	static void GenerateMap(int x, int y, unsigned int keygen);
 	static void DrawFrame();
+
+	static Entity* FindEntity(Vector2 position);
+
+	static std::vector<Entity*> entities;
 private:
 	static int x;
 	static int y;
 
 	static Tile* map;
-	static std::vector<Entity*> entities;
 
 
 	static TileType GenereteTileType();

@@ -55,7 +55,7 @@ void Terrain::DrawFrame() {
 		out += '\n';
 	}
 	out += '\n';
-	for (int i = 0; i < entities.size(); i++) {
+	for (size_t i = 0; i < entities.size(); i++) {
 		int x = entities[i]->Position.x;
 		int y = entities[i]->Position.y;
 		out[y * (Terrain::x + 1) + x] = entities[i]->GetChar();
@@ -66,4 +66,16 @@ void Terrain::DrawFrame() {
 bool Terrain::GenerateTree() {
 	int value = rand() % 1000;
 	return (value >= 950) ? true : false;
+}
+
+Entity* Terrain::FindEntity(Vector2 position)
+{
+	for (int i = 0; i < entities.size(); i++) 
+	{
+		if(entities[i]->Position == position)
+		{
+			return entities[i];
+		}
+	}
+	return nullptr;
 }

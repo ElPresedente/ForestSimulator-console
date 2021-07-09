@@ -2,7 +2,7 @@
 #include "Terrain.h"
 using namespace std;
 #include <cstdlib>
-
+#include <Windows.h>
 
 
 int main() {
@@ -16,7 +16,16 @@ int main() {
 
 	system("cls");
 	Terrain::GenerateMap(x, y, key);
+	for (int n = 0; n < 10; n++) {
+		
+		for (size_t i = 0; i < Terrain::entities.size(); i++) { //main events loop
+			Terrain::entities[i]->EntityFunction();
+		}
 
-	Terrain::DrawFrame();
+		system("cls");
+		Terrain::DrawFrame(); //draw new frame
+		Sleep(1000);
+	}
+	
 	return 0;
 }

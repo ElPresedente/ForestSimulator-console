@@ -1,5 +1,6 @@
 #pragma once
 #include "Entity.h"
+#include "FoodEntity.h"
 class TreeEntity :
     virtual public Entity
 {

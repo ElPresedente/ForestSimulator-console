@@ -1,2 +1,9 @@
-﻿  Tile.cpp
+﻿  Entity.cpp
+  FoodEntity.cpp
+  Terrain.cpp
+D:\test\ForestSimulator-console\Terrain.cpp(73,20): warning C4018: <: несоответствие типов со знаком и без знака
+  Tile.cpp
+  TreeEntity.cpp
+  main.cpp
+  Создание кода...
   ForestSimulator (console).vcxproj -> D:\test\ForestSimulator-console\Debug\ForestSimulator (console).exe
