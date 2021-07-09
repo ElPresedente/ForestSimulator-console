@@ -6,6 +6,8 @@
 #include <vector>
 #include <string>
 #include "TreeEntity.h"
+#include "AnimalEntity.h"
+#include "FoodEntity.h"
 class Terrain
 {
 public:
@@ -28,6 +30,6 @@ private:
 
 
 	static TileType GenereteTileType();
-	static bool GenerateTree();
+	static EntityType GenerateEntity();
 };
 

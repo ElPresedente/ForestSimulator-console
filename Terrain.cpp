@@ -17,9 +17,25 @@ void Terrain::GenerateMap(int X, int Y, unsigned int keygen) {
 		for (int b = 1; b < x - 1; b++) {
 			TileType type = GenereteTileType();
 			map[a * x + b] = Tile(type);
-			if (type == TileType::Grass && GenerateTree()) {
-				Entity* tree = new TreeEntity(Vector2(b, a));
-				entities.push_back(tree);
+			if (type == TileType::Grass){
+				EntityType newEntity = GenerateEntity();
+				switch (newEntity) {
+					case EntityType::Animal:{
+						entities.push_back(new AnimalEntity(Vector2(b, a)));
+						break;
+					}
+					case EntityType::Food: {
+						entities.push_back(new FoodEntity(Vector2(b, a)));
+						break;
+					}
+					case EntityType::Tree: {
+						entities.push_back(new TreeEntity(Vector2(b, a)));
+						break;
+					}
+					default: {
+						break;
+					}
+				}
 			}
 		}
 		map[a * x + x - 1] = Tile(TileType::Rock);
@@ -63,9 +79,20 @@ void Terrain::DrawFrame() {
 	std::cout << out;
 }
 
-bool Terrain::GenerateTree() {
+EntityType Terrain::GenerateEntity() {
 	int value = rand() % 1000;
-	return (value >= 950) ? true : false;
+	if (value >= 970) {
+		return EntityType::Tree;
+	}
+	else if (value >= 950) {
+		return EntityType::Food;
+	}
+	else if (value >= 940){
+		return EntityType::Animal;
+	}
+	else {
+		return EntityType::None;
+	}
 }
 
 Entity* Terrain::FindEntity(Vector2 position)

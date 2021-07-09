@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimalEntity.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="FoodEntity.cpp" />
     <ClCompile Include="main.cpp" />
@@ -147,6 +148,7 @@
     <ClCompile Include="TreeEntity.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimalEntity.h" />
     <ClInclude Include="DataStructures.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="FoodEntity.h" />
