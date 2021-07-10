@@ -1,6 +1,8 @@
 #include "Tile.h"
 
-Tile::Tile(TileType type) : type(type) {};
+Tile::Tile(Vector2 position, TileType type) :
+	position(position), type(type) 
+{};
 
 char Tile::GetChar() {
 	switch (type) {
@@ -17,4 +19,8 @@ char Tile::GetChar() {
 			break;
 		}
 	}
+}
+
+bool Tile::operator<(const Tile& tile) {
+	return true;
 }

@@ -22,10 +22,17 @@ public:
 	static Entity* FindEntity(Vector2 position);
 
 	static std::vector<Entity*> entities;
-private:
+
+	static int GetMapSizeX() {
+		return x;
+	}
+	static int GetMapSizeY() {
+		return y;
+	}
 	static int x;
 	static int y;
 
+private:
 	static Tile* map;
 
 
