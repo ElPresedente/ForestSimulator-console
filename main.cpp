@@ -15,28 +15,28 @@ int main() {
 	//SetConsoleTextAttribute(hConsole, k);
 	
 	cout << "Type x & y\n";
-	//cin >> x >> y;
-	x = 20; y = 10;
+	cin >> x >> y;
+	//x = 20; y = 10;
 	//SetConsoleTextAttribute(hConsole, 7);
 	cout << "Type keygen (uint)\n";
 	unsigned int key;
-	//cin >> key;
-	key = 1111;
+	cin >> key;
+	//key = 1111;
 	Terrain::GenerateMap(x, y, key);
 
 	system("cls");
 	Terrain::DrawFrame();
 
-	//for (int n = 0; n < 10; n++) {
+	for (int n = 0; n < 50; n++) {
 	Sleep(100);
 		for (size_t i = 0; i < Terrain::entities.size(); i++) { //main events loop
 			Terrain::entities[i]->EntityFunction();
 		}
 	
-	//	system("cls");
-	//	Terrain::DrawFrame(); //draw new frame
-	//	Sleep(1000);
-	//}
+		system("cls");
+		Terrain::DrawFrame(); //draw new frame
+		Sleep(1000);
+	}
 	
 	return 0;
 }

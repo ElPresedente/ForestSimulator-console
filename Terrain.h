@@ -19,6 +19,8 @@ public:
 	static void GenerateMap(int x, int y, unsigned int keygen);
 	static void DrawFrame();
 
+	static void DeleteEntity(Entity* ent);
+
 	static Entity* FindEntity(Vector2 position);
 
 	static std::vector<Entity*> entities;

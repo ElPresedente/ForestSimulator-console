@@ -13,7 +13,7 @@ class AnimalEntity :
 public:
     void EntityFunction();
     char GetChar();
-    int health;
+    int hunger;
 
     AnimalEntity(Vector2 position);
 private:
@@ -21,7 +21,7 @@ private:
     void Move(Vector2 newPos);
     Vector2 FindFood();
     void SetWay(Vector2 target, Vector2* searchMap);
-
+    bool CheckFood();
     std::vector<Vector2>* animalPath;
 };
 

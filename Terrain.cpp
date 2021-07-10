@@ -23,34 +23,34 @@ void Terrain::GenerateMap(int X, int Y, unsigned int keygen) {
 			map[a * x + b] = Tile(Vector2(b, a), type);
 			if (type == TileType::Grass){
 				j++;
-				switch (j) {
+				/*switch (j) {
 					case 5: {
 						entities.push_back(new AnimalEntity(Vector2(b, a)));
 						break;
 					}
-					case 30: {
+					case 80: {
 						entities.push_back(new FoodEntity(Vector2(b, a)));
 						break;
 					}
+				}*/
+				EntityType newEntity = GenerateEntity();
+				switch (newEntity) {
+					case EntityType::Animal:{
+						entities.push_back(new AnimalEntity(Vector2(b, a)));
+						break;
+					}
+					case EntityType::Food: {
+						entities.push_back(new FoodEntity(Vector2(b, a)));
+						break;
+					}
+					case EntityType::Tree: {
+						entities.push_back(new TreeEntity(Vector2(b, a)));
+						break;
+					}
+					default: {
+						break;
+					}
 				}
-				//EntityType newEntity = GenerateEntity();
-				//switch (newEntity) {
-				//	case EntityType::Animal:{
-				//		entities.push_back(new AnimalEntity(Vector2(b, a)));
-				//		break;
-				//	}
-				//	case EntityType::Food: {
-				//		entities.push_back(new FoodEntity(Vector2(b, a)));
-				//		break;
-				//	}
-				//	case EntityType::Tree: {
-				//		entities.push_back(new TreeEntity(Vector2(b, a)));
-				//		break;
-				//	}
-				//	default: {
-				//		break;
-				//	}
-				//}
 			}
 		}
 		map[a * x + x - 1] = Tile(Vector2(x-1, a), TileType::Rock);
@@ -102,11 +102,21 @@ EntityType Terrain::GenerateEntity() {
 	else if (value >= 970) {
 		return EntityType::Food;
 	}
-	else if (value >= 960){
+	else if (value >= 965){
 		return EntityType::Animal;
 	}
 	else {
 		return EntityType::None;
+	}
+}
+
+void Terrain::DeleteEntity(Entity* ent) {
+	for (auto i = entities.begin(); i < entities.end(); i++) {
+		if (*i == ent) {
+			delete ent;
+			entities.erase(i);
+			return;
+		}
 	}
 }
 

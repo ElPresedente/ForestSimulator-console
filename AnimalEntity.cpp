@@ -4,27 +4,64 @@
 AnimalEntity::AnimalEntity(Vector2 position) :
 	Entity(position, EntityType::Animal)
 {
-	health = (rand() % 2) + 2;
+	hunger = 0;
 	animalPath = nullptr;
 }
 
 void AnimalEntity::EntityFunction() {
-	Vector2 foodcoord = FindFood();
-	Sleep(500);
-	std::cout << foodcoord.x << ' ' << foodcoord.y << std::endl;
-	if (foodcoord == Vector2()) {
+	hunger += ((rand() % 1000) > 750) ? 1 : 0;
+	if (hunger <= 0) {
 		RandomMovement();
+		return;
+	}
+	if (animalPath == nullptr) {
+		Vector2 foodCoord = FindFood();
+		if (foodCoord == Vector2()) {
+			RandomMovement();
+		}
 	}
 	else {
-		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-		SetConsoleCursorPosition(hConsole, {(short)foodcoord.x, (short)foodcoord.y});
-		SetConsoleTextAttribute(hConsole, 6);
-		std::cout << '*';
-		SetConsoleCursorPosition(hConsole, { 0, 15 });
-		SetConsoleTextAttribute(hConsole, 7);
+		bool foodAviable = CheckFood();
+		if (foodAviable) {
+
+			Move(animalPath->back());
+			/*HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+			SetConsoleTextAttribute(hConsole, 6);
+			SetConsoleCursorPosition(hConsole, { (short)animalPath->at(0).x, (short)animalPath->at(0).y });
+			SetConsoleTextAttribute(hConsole, 7);
+			std::cout << '&';
+			Sleep(300);*/
+			if (Position == animalPath->at(1)) {
+				Entity* foodEntity = Terrain::FindEntity(animalPath->at(0));
+				FoodEntity* ptr = dynamic_cast<FoodEntity*>(foodEntity);
+				hunger -= ptr->foodAmount;
+				Terrain::DeleteEntity(foodEntity);
+				delete animalPath;
+				animalPath = nullptr;
+				return;
+			}
+			else {
+				animalPath->pop_back();
+			}
+		}
+		else {
+			delete animalPath;
+			FindFood();
+		}
 
 	}
 }
+
+bool AnimalEntity::CheckFood() {
+	Entity* foodEnt = Terrain::FindEntity(animalPath->at(0));
+	if (foodEnt == nullptr || foodEnt->Type != EntityType::Food) {
+		return false;
+	}
+	else {
+		return true;
+	}
+}
+
 char AnimalEntity::GetChar() {
 	return '^';
 }
@@ -81,12 +118,16 @@ Vector2 AnimalEntity::FindFood() {
 		neighbors[2] = Terrain::GetTile(Vector2(current.position.x, current.position.y + 1));
 		neighbors[3] = Terrain::GetTile(Vector2(current.position.x - 1, current.position.y));
 		for (int i = 0; i < 4; i++) {
-			if (!visited.count(neighbors[i].position) && neighbors[i].type != TileType::Rock) 
+			if (!visited.count(neighbors[i].position) && neighbors[i].type != TileType::Rock)
 			{
+				Entity* ent = Terrain::FindEntity(neighbors[i].position);
+				if (ent != nullptr && ent->Type != EntityType::Food) {
+					continue;
+				}
 				elements.push(neighbors[i]);
 				searchMap[neighbors[i].position.ToInt()] = current.position;
 				visited.insert(neighbors[i].position);
-				Entity* ent = Terrain::FindEntity(neighbors[i].position);
+				
 				if (ent == nullptr)
 				{ 
 					continue;
@@ -100,6 +141,7 @@ Vector2 AnimalEntity::FindFood() {
 			
 		}
 	}
+	delete searchMap;
 	return Vector2();
 }
 
@@ -108,16 +150,17 @@ void AnimalEntity::SetWay(Vector2 target, Vector2* searchMap) {
 	Vector2 current = target;
 	while (current != Position) {
 		std::cout << current.x << ' ' << current.y << '\n';
-		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+		/*HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		SetConsoleCursorPosition(hConsole, { (short)current.x, (short)current.y });
 		SetConsoleTextAttribute(hConsole, 6);
 		std::cout << '&';
 		SetConsoleCursorPosition(hConsole, { 0, 15 });
-		SetConsoleTextAttribute(hConsole, 7);
+		SetConsoleTextAttribute(hConsole, 7);*/
 		animalPath->push_back(current);
 		current = searchMap[current.ToInt()];
 		
-		Sleep(500);
+		//Sleep(500);
 	}
-	std::cout << animalPath->size();
+	animalPath->push_back(Position);
+	delete searchMap;
 }

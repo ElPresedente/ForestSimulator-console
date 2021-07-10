@@ -7,8 +7,9 @@ public:
 	EntityType Type;
 	virtual void EntityFunction();
 	virtual char GetChar();
+
+	virtual ~Entity();
 protected:
 	Entity(Vector2 position, EntityType type = EntityType::None);
-	virtual ~Entity();
 };
 
